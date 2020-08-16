@@ -1,0 +1,9 @@
+#!/bin/bash
+
+self="`realpath "$0"`" &&
+dirname="`dirname "$self"`" &&
+\
+cd "$dirname/../" &&
+source ./src/iniedit.sh &&
+iniedit "$@"
+

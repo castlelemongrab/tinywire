@@ -4,7 +4,7 @@ all:
 
 stats:
 	for log in logs/*.log; do \
-	  wc -l < "$$log" > "counts/`basename "$$log" .log`.count"; \
+	  wc -l < "$$log" > "stats/`basename "$$log" .log`.count"; \
 	done;
 
 clean:

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source config/tinyguard.conf
+source src/iniedit.sh
+source config/tinywire.conf
 
 log() {
 
@@ -18,7 +19,7 @@ log() {
   if [ "$has_pv" -eq 0 ]; then
     # Magic progress bars
     $fn 2>&1 | \
-      pv -petl -N "$fn" -s "`cat "counts/$fn.count"`" > "logs/$fn.log"
+      pv -petl -N "$fn" -s "`cat "stats/$fn.count"`" > "logs/$fn.log"
     rv="$?"
 
     local ts="`date '+%Y-%m-%d %H:%M:%S'`"
@@ -82,23 +83,6 @@ install_apt() {
   systemctl enable wg-quick@wg0
 }
 
-install_nvm() {
-
-  bash contrib/nvm/install.sh &&
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-}
-
-install_node() {
-
-  nvm install "$NODE_VERSION"
-}
-
-install_iniedit() {
-
-  npm install -g '@castlelemongrab/iniedit'
-}
-
 install_djbdns() {
 
   (cd downloads &&
@@ -141,6 +125,4 @@ install_all () {
   \
   reboot
 }
-
-install_all "$@"
 
